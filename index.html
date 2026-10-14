@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Hani! 💖</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f3e7e9 0%, #e3eeff 99%);
+            background-color: #f7e8f6;
+            background-image: radial-gradient(#d4c1ed 15%, transparent 16%), radial-gradient(#fce4ec 15%, transparent 16%);
+            background-size: 60px 60px;
+            background-position: 0 0, 30px 30px;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-y: auto;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 460px;
+            width: 100%;
+            border: 4px solid #d4c1ed;
+            position: relative;
+            z-index: 2;
+        }
+
+        h2, h1 {
+            color: #6a4c93;
+        }
+
+        .passcode-dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .dot {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #b5838d;
+            border-radius: 50%;
+            background: #fff;
+        }
+
+        .dot.active {
+            background: #b5838d;
+        }
+
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            max-width: 240px;
+            margin: 0 auto;
+        }
+
+        .key {
+            background: #fff0f3;
+            border: 2px solid #ffb5a7;
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            font-size: 20px;
+            color: #6a4c93;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+            transition: 0.2s;
+            user-select: none;
+        }
+
+        .key:active {
+            background: #ffb5a7;
+            transform: scale(0.95);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .btn {
+            background-color: #ffb5a7;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin: 10px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .btn:hover {
+            background-color: #ff8fab;
+        }
+
+        img.character {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #ffb5a7;
+            margin-bottom: 12px;
+        }
+
+        .message-box {
+            font-size: 16px;
+            color: #4a4e69;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 12px 0;
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        .memory-item {
+            width: 100%;
+            height: 140px;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 3px solid #ffb5a7;
+        }
+
+        .love-message {
+            font-size: 13.5px;
+            color: #4a4e69;
+            line-height: 1.6;
+            text-align: left;
+            background: #fff9fb;
+            padding: 16px;
+            border-radius: 15px;
+            border: 2px dashed #ffb5a7;
+            margin-bottom: 15px;
+            max-height: 240px;
+            overflow-y: auto;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .yt-video {
+            width: 100%;
+            height: 220px;
+            border-radius: 12px;
+            border: 3px solid #ffb5a7;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SCREEN 1: PASSCODE -->
+    <div class="card" id="screen-passcode">
+        <h2>Enter passcode ✨</h2>
+        <p style="font-size: 14px; color: #888;">(Hint: 2345)</p>
+        <div class="passcode-dots">
+            <div class="dot" id="dot-0"></div>
+            <div class="dot" id="dot-1"></div>
+            <div class="dot" id="dot-2"></div>
+            <div class="dot" id="dot-3"></div>
+        </div>
+        <div class="keypad">
+            <button class="key" type="button" onclick="pressKey('1')">1</button>
+            <button class="key" type="button" onclick="pressKey('2')">2</button>
+            <button class="key" type="button" onclick="pressKey('3')">3</button>
+            <button class="key" type="button" onclick="pressKey('4')">4</button>
+            <button class="key" type="button" onclick="pressKey('5')">5</button>
+            <button class="key" type="button" onclick="pressKey('6')">6</button>
+            <button class="key" type="button" onclick="pressKey('7')">7</button>
+            <button class="key" type="button" onclick="pressKey('8')">8</button>
+            <button class="key" type="button" onclick="pressKey('9')">9</button>
+            <button class="key" type="button" onclick="pressKey('0')">0</button>
+        </div>
+    </div>
+
+    <!-- SCREEN 2: QUESTION -->
+    <div class="card hidden" id="screen-question">
+        <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=300" alt="Cute Puppy" class="character">
+        <div class="message-box">Hey Hani! I made something for you do you wanna see it? 🥺💖</div>
+        <button class="btn" type="button" onclick="showScreen('screen-message')">Yes! 🥰</button>
+        <button class="btn" type="button" style="background-color: #adb5bd;" onclick="showScreen('screen-angry')">No 😒</button>
+    </div>
+
+    <!-- SCREEN 3: ANGRY SCREEN -->
+    <div class="card hidden" id="screen-angry">
+        <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=300" alt="Angry Puppy" class="character">
+        <div class="message-box">SERIOUSLY?! How dare you hmph! 😡</div>
+        <button class="btn" type="button" onclick="showScreen('screen-question')">Go back ⬅️</button>
+    </div>
+
+    <!-- SCREEN 4: HEARTFELT MESSAGE -->
+    <div class="card hidden" id="screen-message">
+        <h1 style="color: #ff477e; margin-top: 0; font-size: 22px;">💌 A Special Note For You 💖</h1>
+        
+        <div class="love-message">
+            Happy Birthday to my absolute best person and my original bench partner, Hani! Looking back, it feels like just yesterday we were sitting together in school, navigating through classes and making every single boring lecture feel like an adventure just because we were side by side. It’s crazy how much has changed since then—our subjects, our interests, and even our academic paths—but I am so incredibly grateful that despite our fields being completely different now, we are still navigating this college life under the same roof. Even though we don't share the same classrooms or study the same things anymore, nothing has changed between us. You are still the first person I want to share my wins and my bad days with. Thank you for being my constant through every phase of life, from school kids to college students. I hope this year brings you all the success you’ve been working so hard for and all the happiness your heart can hold. I’m always rooting for you, just like I always have. Love you so much ❤️
+        </div>
+
+        <div class="button-group">
+            <button class="btn" type="button" style="padding: 8px 18px; font-size: 14px;" onclick="showScreen('screen-question')">⬅️ Back</button>
+            <button class="btn" type="button" style="padding: 8px 18px; font-size: 14px; background-color: #ff477e;" onclick="showScreen('screen-birthday')">Next ➡️</button>
+        </div>
+    </div>
+
+    <!-- SCREEN 5: MEMORIES -->
+    <div class="card hidden" id="screen-birthday">
+        <h1 style="color: #ff477e; margin-top: 0; font-size: 22px;">🎉 Our Cute Memories 🌸</h1>
+
+        <div class="memory-grid">
+            <img src="Snapchat-786681663.jpg" alt="Memory 1" class="memory-item">
+            <img src="Snapchat-1343787210.jpg" alt="Memory 2" class="memory-item">
+            <img src="Snapchat-405809950.jpg" alt="Memory 3" class="memory-item">
+            <img src="Snapchat-1480490039.jpg" alt="Memory 4" class="memory-item">
+            <img src="Snapchat-79745910.jpg" alt="Memory 5" class="memory-item">
+        </div>
+
+        <div class="button-group">
+            <button class="btn" type="button" style="padding: 8px 18px; font-size: 14px;" onclick="showScreen('screen-message')">⬅️ Back</button>
+            <button class="btn" type="button" style="padding: 8px 18px; font-size: 14px; background-color: #ff477e;" onclick="showScreen('screen-song')">Next ➡️</button>
+        </div>
+    </div>
+
+    <!-- SCREEN 6: YOUTUBE SONG -->
+    <div class="card hidden" id="screen-song">
+        <h2 style="color: #ff477e; margin-top: 0; font-size: 22px;">🎵 Happy Birthday Song! 🎶</h2>
+        
+        <!-- Updated with Hani's specific YouTube video link -->
+        <iframe class="yt-video" src="https://www.youtube.com/embed/6j8VetZg5GA?autoplay=1" title="YouTube video player" frameborder="0" allow="autoplay"></iframe>
+
+        <div class="button-group" style="margin-top: 15px;">
+            <button class="btn" type="button" style="padding: 8px 18px; font-size: 14px;" onclick="showScreen('screen-birthday')">⬅️ Back</button>
+            <button class="btn" type="button" style="padding: 8px 18px; font-size: 14px; background-color: #ff477e;" onclick="showScreen('screen-bye')">Next ➡️</button>
+        </div>
+    </div>
+
+    <!-- SCREEN 7: BYE BYE BEARS STICKER -->
+    <div class="card hidden" id="screen-bye">
+        <img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" alt="Cute Bears Sticker" style="width: 160px; height: 160px; object-fit: contain; margin-bottom: 10px;">
+        
+        <h2 style="color: #ff477e; margin: 5px 0;">Bye Bye! 👋</h2>
+        
+        <div class="message-box" style="font-size: 15px; margin-bottom: 15px;">
+            Have a good day and keep smiling always! 🧸💖✨
+        </div>
+
+        <div class="button-group">
+            <button class="btn" type="button" style="padding: 8px 18px; font-size: 14px;" onclick="showScreen('screen-song')">⬅️ Back</button>
+            <button class="btn" type="button" style="padding: 8px 18px; font-size: 14px; background-color: #6a4c93;" onclick="resetApp()">Restart 🔄</button>
+        </div>
+    </div>
+
+    <script>
+        let currentPin = "";
+        const correctPin = "2345";
+
+        function pressKey(num) {
+            if (currentPin.length < 4) {
+                currentPin += num;
+                updateDots();
+                
+                if (currentPin.length === 4) {
+                    setTimeout(() => {
+                        if (currentPin === correctPin) {
+                            showScreen('screen-question');
+                        } else {
+                            alert("Wrong passcode! Try 2345 🤫");
+                            currentPin = "";
+                            updateDots();
+                        }
+                    }, 150);
+                }
+            }
+        }
+
+        updateDots(); // Initialize dots
+
+        function updateDots() {
+            for (let i = 0; i < 4; i++) {
+                const dot = document.getElementById(`dot-${i}`);
+                if (dot) {
+                    if (i < currentPin.length) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                }
+            }
+        }
+
+        function showScreen(screenId) {
+            document.querySelectorAll('.card').forEach(card => {
+                card.classList.add('hidden');
+            });
+            const target = document.getElementById(screenId);
+            if (target) {
+                target.classList.remove('hidden');
+            }
+        }
+
+        function resetApp() {
+            currentPin = "";
+            updateDots();
+            showScreen('screen-passcode');
+        }
+    </script>
+</body>
+</html>
